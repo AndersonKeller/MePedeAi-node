@@ -12,8 +12,8 @@ import {
 
 @Entity("establish")
 class Establish {
-  @PrimaryGeneratedColumn("increment")
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column({ length: 45 })
   name: string;

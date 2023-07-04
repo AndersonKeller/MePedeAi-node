@@ -9,7 +9,7 @@ export const createEstablishSchema = z.object({
 });
 export const returnEstablishSchema = createEstablishSchema
   .extend({
-    id: z.number(),
+    id: z.string(),
     createdAt: z.string(),
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
