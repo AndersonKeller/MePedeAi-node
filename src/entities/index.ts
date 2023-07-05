@@ -1,2 +1,3 @@
 import { Establish } from "./establish.entities";
-export { Establish };
+import { TypeProduct } from "./typeProduct.entities";
+export { Establish, TypeProduct };
