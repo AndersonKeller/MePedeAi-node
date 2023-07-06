@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Establish } from "./establish.entities";
 
 @Entity("type_product")
 class TypeProduct {
@@ -8,5 +9,7 @@ class TypeProduct {
   name: string;
   @Column()
   description: string;
+  @ManyToOne(() => Establish)
+  establish: Establish;
 }
 export { TypeProduct };

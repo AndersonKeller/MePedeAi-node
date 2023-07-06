@@ -20,5 +20,5 @@ export const retriveOwnerController = async (
   const establish: Establish | undefined = await retriveOwnerService(
     establishId
   );
-  return res.status(200).json(establish);
+  return res.status(201).json(establish);
 };
