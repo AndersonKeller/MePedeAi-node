@@ -7,7 +7,8 @@ export const createProductController = async (
   res: Response
 ): Promise<Response> => {
   const productData = req.body;
-  const product: Product = await createProductService(productData);
+  const establishId: string = req.user.id;
+  const product: Product = await createProductService(productData, establishId);
   return res.status(201).json(product);
 };
 export const getAllProductsController = async (
