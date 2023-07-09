@@ -6,12 +6,16 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Addresses } from "./address.entities";
+import { Establish } from "./establish.entities";
 
 @Entity("client")
 class Client {
@@ -26,7 +30,7 @@ class Client {
 
   @Column({ length: 120 })
   password: string;
-  @OneToMany(() => Addresses, (addresses) => addresses.client)
+  @ManyToOne(() => Addresses, (addresses) => addresses.client)
   address: Addresses[];
 
   @CreateDateColumn({ type: "date" })
@@ -37,6 +41,10 @@ class Client {
 
   @DeleteDateColumn({ type: "date", nullable: true })
   deletedAt: string | null;
+
+  @ManyToOne(() => Establish, (establish) => establish.clients)
+  @JoinColumn()
+  establish: Establish[];
 
   @BeforeInsert()
   @BeforeUpdate()

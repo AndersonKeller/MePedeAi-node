@@ -1,9 +1,12 @@
-import { iAddress } from "./../../interfaces/addresses/addresses.interfaces";
 import { z } from "zod";
 import {
   createAddressSchema,
   returnAddressSchema,
 } from "../address/address.schemas";
+import {
+  createEstablishSchema,
+  returnEstablishSchema,
+} from "../establish/establish.schemas";
 
 export const createClientSchema = z.object({
   name: z.string().max(45, "Name max length is 45 characters"),
@@ -11,6 +14,7 @@ export const createClientSchema = z.object({
   email: z.string().email("Email wrong format"),
   password: z.string().max(120),
   addresses: createAddressSchema,
+  establish: returnEstablishSchema,
 });
 export const returnClientSchema = createClientSchema
   .extend({

@@ -17,7 +17,11 @@ export const ensureTokenvalidMiddleware = async (
     if (error) {
       throw new AppError(error.message, 401);
     }
-    request.user = { admin: decoded.admin, id: decoded.sub };
+    request.user = {
+      admin: decoded.admin,
+      id: decoded.sub,
+      type: decoded.type,
+    };
   });
   return next();
 };

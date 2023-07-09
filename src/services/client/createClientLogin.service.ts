@@ -1,40 +1,36 @@
 import { Repository } from "typeorm";
 import { iLogin } from "../../interfaces/login/login.interfaces";
+import { Client } from "../../entities";
 import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors";
-import { Establish } from "../../entities";
 
-export const createLoginService = async (
+export const createClientLoginService = async (
   loginData: iLogin
 ): Promise<string> => {
-  const establishRepository: Repository<Establish> =
-    AppDataSource.getRepository(Establish);
-
-  const establish: Establish | null = await establishRepository.findOneBy({
+  const clientRepository: Repository<Client> =
+    AppDataSource.getRepository(Client);
+  const client: Client | null = await clientRepository.findOneBy({
     email: loginData.email,
   });
-  if (!establish) {
+  if (!client) {
     throw new AppError("Invalid credentials", 401);
   }
-  const passwordMatch = await compare(loginData.password, establish.password);
-
+  const passwordMatch = await compare(loginData.password, client.password);
   if (!passwordMatch) {
     throw new AppError("Invalid credentials", 401);
   }
-
   const token: string = jwt.sign(
     {
-      admin: establish.admin,
-      type: "establish",
+      admin: false,
+      type: "client",
     },
     process.env.SECRET_KEY!,
     {
       expiresIn: "24h",
-      subject: String(establish.id),
+      subject: String(client.id),
     }
   );
-
   return token;
 };

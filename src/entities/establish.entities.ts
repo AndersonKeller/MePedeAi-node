@@ -8,7 +8,11 @@ import {
   DeleteDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  ManyToMany,
+  JoinTable,
+  OneToMany,
 } from "typeorm";
+import { Client } from "./client.entities";
 
 @Entity("establish")
 class Establish {
@@ -39,6 +43,8 @@ class Establish {
   @DeleteDateColumn({ type: "date", nullable: true })
   deletedAt: string | null;
 
+  @OneToMany(() => Client, (client) => client.establish)
+  clients: Client[];
   @BeforeInsert()
   @BeforeUpdate()
   hashPassword() {

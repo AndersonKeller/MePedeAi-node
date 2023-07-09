@@ -1,14 +1,11 @@
 import { Repository } from "typeorm";
-import { Addresses, Client } from "../../entities";
+import { Addresses, Client, Establish } from "../../entities";
 import {
   CreateClient,
   iClient,
 } from "../../interfaces/client/client.interfaces";
 import { AppDataSource } from "../../data-source";
-import {
-  CreateAddress,
-  iAddress,
-} from "../../interfaces/addresses/addresses.interfaces";
+import { CreateAddress } from "../../interfaces/addresses/addresses.interfaces";
 import { returnClientSchema } from "../../schemas/client/client.schemas";
 
 export const createClientService = async (
@@ -18,18 +15,30 @@ export const createClientService = async (
     AppDataSource.getRepository(Client);
   const addressRepository: Repository<Addresses> =
     AppDataSource.getRepository(Addresses);
-  const addressData: CreateAddress = clientData.addresses;
+  const establishRepository: Repository<Establish> =
+    AppDataSource.getRepository(Establish);
 
-  const client: Client = clientRepository.create(clientData);
-  await clientRepository.save(client);
-  const newAddress: any = {
-    ...addressData,
-    client: client,
-  };
-  const address: any = addressRepository.create(newAddress);
+  const addressData: CreateAddress = clientData.addresses;
+  const address: Addresses = addressRepository.create(addressData);
   await addressRepository.save(address);
 
-  client.address = address;
+  clientData.addresses = address;
+  const findEstablish: Establish | null = await establishRepository.findOne({
+    where: {
+      id: clientData.establish.id,
+    },
+  });
+  const newClient: any = {
+    ...clientData,
+    address: clientData.addresses,
+  };
+
+  const client: Client[] = clientRepository.create({
+    establish: findEstablish!,
+    ...newClient,
+  });
+
+  await clientRepository.save(client);
 
   const returnClient = returnClientSchema.parse(client);
   return returnClient;

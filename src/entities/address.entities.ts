@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { stateType } from "../schemas/address/address.schemas";
 import { Client } from "./client.entities";
 
@@ -18,7 +24,7 @@ class Addresses {
   number: string;
   @Column({ type: "varchar", nullable: true })
   reference: string | null;
-  @ManyToOne(() => Client, (client) => client.address)
+  @OneToMany(() => Client, (client) => client.address)
   client: Client;
 }
 export { Addresses };
