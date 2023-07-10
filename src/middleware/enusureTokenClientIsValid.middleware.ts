@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { AppError } from "../errors";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-export const ensureTokenvalidMiddleware = async (
+export const ensureTokenClientIsValidMiddleware = async (
   request: Request,
   response: Response,
   next: NextFunction
@@ -17,7 +17,7 @@ export const ensureTokenvalidMiddleware = async (
     if (error) {
       throw new AppError(error.message, 401);
     }
-    if (decoded.type != "establish") {
+    if (decoded.type != "client") {
       throw new AppError("unsificient permission", 401);
     }
     request.user = {
