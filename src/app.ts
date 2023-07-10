@@ -7,6 +7,7 @@ import { typeProductRoutes } from "./routes/typeProduct.routes";
 import { productRoutes } from "./routes/product.routes";
 import { menuRoutes } from "./routes/menu.routes";
 import { clientRoutes } from "./routes/client.routes";
+import { orderRoutes } from "./routes/order.routes";
 const cors = require("cors");
 const app: Application = express();
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use("/type-product", typeProductRoutes);
 app.use("/product", productRoutes);
 app.use("/menu", menuRoutes);
 app.use("/client", clientRoutes);
+app.use("/order", orderRoutes);
 
 app.use(handleErrors);
 export default app;

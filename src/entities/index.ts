@@ -4,4 +4,5 @@ import { Product } from "./product.entities";
 import { Menu } from "./menu.entities";
 import { Client } from "./client.entities";
 import { Addresses } from "./address.entities";
-export { Establish, TypeProduct, Product, Menu, Client, Addresses };
+import { Order } from "./order.entities";
+export { Establish, TypeProduct, Product, Menu, Client, Addresses, Order };
