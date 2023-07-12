@@ -1,8 +1,10 @@
+import { createOrderController } from "./../../controllers/order.controller";
 import { z } from "zod";
 
 import { returnAddressSchema } from "../address/address.schemas";
 import { returnMenuSchema } from "../menu/menu.schemas";
 import { returnProductSchema } from "../product/product.schemas";
+import { returnClientSchema } from "../client/client.schemas";
 export enum orderType {
   delivery = "delivery",
   take = "take",
@@ -19,5 +21,7 @@ export const returnOrderSchema = createOrderSchema
     id: z.number(),
     total: z.number(),
     productsOrder: returnProductSchema.omit({ establish: true }).array(),
+    client: returnClientSchema.omit({ establish: true }),
   })
   .omit({ products: true });
+export const updateOrderSchema = createOrderSchema.partial();

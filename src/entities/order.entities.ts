@@ -7,6 +7,8 @@ import {
   EventSubscriber,
   InsertEvent,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -39,8 +41,9 @@ class Order {
   @JoinColumn()
   menu: Menu;
 
-  @Column()
-  products: string;
+  @ManyToMany(() => Product)
+  @JoinTable()
+  products: Product[];
 
   @Column({ type: "float" })
   total: number;
