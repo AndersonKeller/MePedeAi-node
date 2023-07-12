@@ -7,10 +7,7 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -31,7 +28,7 @@ class Client {
   @Column({ length: 120 })
   password: string;
   @ManyToOne(() => Addresses, (addresses) => addresses.client)
-  address: Addresses[];
+  address: Addresses;
 
   @CreateDateColumn({ type: "date" })
   createdAt: string;
@@ -44,7 +41,7 @@ class Client {
 
   @ManyToOne(() => Establish, (establish) => establish.clients)
   @JoinColumn()
-  establish: Establish[];
+  establish: Establish;
 
   @BeforeInsert()
   @BeforeUpdate()

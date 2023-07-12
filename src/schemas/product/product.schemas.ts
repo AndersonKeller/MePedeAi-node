@@ -6,6 +6,7 @@ export const createProductSchema = z.object({
   name: z.string().max(45),
   description: z.string(),
   typeProduct: z.string(),
+  price: z.number(),
 });
 
 export const returnProductSchema = createProductSchema

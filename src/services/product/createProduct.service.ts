@@ -1,11 +1,7 @@
 import { Repository } from "typeorm";
-import {
-  CreateProduct,
-  iProduct,
-} from "../../interfaces/product/product.interfaces";
+import { CreateProduct } from "../../interfaces/product/product.interfaces";
 import { Establish, Product, TypeProduct } from "../../entities";
 import { AppDataSource } from "../../data-source";
-import { iEstablish } from "../../interfaces/establish/establish.interfaces";
 
 export const createProductService = async (
   productData: CreateProduct,
@@ -33,6 +29,7 @@ export const createProductService = async (
     name: productData.name,
     description: productData.description,
     establish: findEstablish!,
+    price: productData.price,
   });
   await productRepository.save(product);
 

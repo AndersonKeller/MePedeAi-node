@@ -1,5 +1,4 @@
-import { nullable, z } from "zod";
-import { returnClientSchema } from "../client/client.schemas";
+import { z } from "zod";
 
 export enum stateType {
   rs = "RS",

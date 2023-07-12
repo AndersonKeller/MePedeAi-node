@@ -10,6 +10,8 @@ class Product {
   name: string;
   @Column()
   description: string;
+  @Column({ type: "float" })
+  price: number;
   @ManyToOne(() => TypeProduct)
   type: TypeProduct;
   @ManyToOne(() => Establish)
