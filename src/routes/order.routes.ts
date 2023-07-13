@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createOrderController,
+  getOrderByIdController,
   updateOrderController,
 } from "../controllers/order.controller";
 import { ensureTokenClientIsValidMiddleware } from "../middleware/enusureTokenClientIsValid.middleware";
@@ -26,3 +27,4 @@ orderRoutes.patch(
   ensureDataIsValidMiddleware(updateOrderSchema),
   updateOrderController
 );
+orderRoutes.get("/:id", ensureTokenvalidMiddleware, getOrderByIdController);

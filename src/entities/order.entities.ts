@@ -10,6 +10,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -19,6 +20,7 @@ import { Addresses } from "./address.entities";
 import { Menu } from "./menu.entities";
 import { Product } from "./product.entities";
 import { orderType } from "../schemas/order/order.schemas";
+import { OrderProducts } from "./orderProducts.entities";
 
 @Entity("order")
 class Order {
@@ -41,15 +43,14 @@ class Order {
   @JoinColumn()
   menu: Menu;
 
-  @ManyToMany(() => Product)
-  @JoinTable()
-  products: Product[];
-
   @Column({ type: "float" })
   total: number;
 
   @Column({ type: "enum", enum: orderType })
   order_type: orderType;
+
+  @OneToMany(() => OrderProducts, (orderproducts) => orderproducts.order)
+  orderProducts: OrderProducts[];
 }
 
 export { Order };

@@ -13,14 +13,14 @@ export enum orderType {
 export const createOrderSchema = z.object({
   address: returnAddressSchema.omit({ id: true }).optional(),
   menu: returnMenuSchema.pick({ id: true }),
-  products: returnProductSchema.pick({ id: true }).array(),
+  products: returnProductSchema.pick({ id: true, quantity: true }).array(),
   order_type: z.nativeEnum(orderType),
 });
 export const returnOrderSchema = createOrderSchema
   .extend({
     id: z.number(),
     total: z.number(),
-    productsOrder: returnProductSchema.omit({ establish: true }).array(),
+    orderProducts: returnProductSchema.omit({ establish: true }).array(),
     client: returnClientSchema.omit({ establish: true }),
   })
   .omit({ products: true });

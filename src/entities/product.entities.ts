@@ -1,6 +1,14 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { orderRoutes } from "./../routes/order.routes";
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { TypeProduct } from "./typeProduct.entities";
 import { Establish } from "./establish.entities";
+import { OrderProducts } from "./orderProducts.entities";
 
 @Entity("product")
 class Product {
@@ -12,9 +20,13 @@ class Product {
   description: string;
   @Column({ type: "float" })
   price: number;
+  @Column({ type: "int", default: 1 })
+  quantity: number;
   @ManyToOne(() => TypeProduct)
   type: TypeProduct;
   @ManyToOne(() => Establish)
   establish: Establish;
+  @OneToMany(() => OrderProducts, (orderproducts) => orderproducts.product)
+  orderProducts: Product[];
 }
 export { Product };

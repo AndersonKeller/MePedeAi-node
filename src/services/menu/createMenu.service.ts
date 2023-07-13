@@ -26,6 +26,7 @@ export const createMenuService = async (
   if (findMenu) {
     const newMenu: any = {
       ...findMenu,
+
       ...menuData,
     };
     await menuRepository.save(newMenu);

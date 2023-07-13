@@ -5,12 +5,14 @@ import {
   Establish,
   Menu,
   Order,
+  OrderProducts,
   Product,
 } from "../../entities";
 import { CreateOrder, iOrder } from "../../interfaces/order/order.interfaces";
 import { AppDataSource } from "../../data-source";
 
 import { returnOrderSchema } from "../../schemas/order/order.schemas";
+import { iProduct } from "../../interfaces/product/product.interfaces";
 
 export const createOrderService = async (
   orderData: CreateOrder,
@@ -28,7 +30,8 @@ export const createOrderService = async (
   const productRepository: Repository<Product> =
     AppDataSource.getRepository(Product);
   const orderRepository: Repository<Order> = AppDataSource.getRepository(Order);
-
+  const orderproductRepository: Repository<OrderProducts> =
+    AppDataSource.getRepository(OrderProducts);
   const findClient: Client | null = await clientRepository.findOne({
     where: {
       id: id,
@@ -72,33 +75,51 @@ export const createOrderService = async (
     },
   });
 
-  const totalPrice: number = findProducts.reduce((prev, next, index) => {
-    const manys: number[] = ids.filter((id) => id == next.id);
-    if (manys.length > 1) {
-      for (let i = 1; i < manys.length; i++) {
-        findProducts.push(next);
-      }
-    }
-    return prev + next.price * manys.length;
-  }, 0);
-  console.log(findProducts);
+  // console.log(findProducts);
+  const orderQuantities = orderData.products.map((prod) => {
+    const findProd: Product | undefined = findProducts.find(
+      (prodFind) => prodFind.id == prod.id
+    );
+    const newProd = { ...findProd, quantity: prod.quantity };
+    return newProd;
+  });
+  const totalValues: number[] = orderQuantities.map((prod) => {
+    const total = findProducts.reduce((prev, next) => {
+      return next.price * prod.quantity;
+    }, 0);
+
+    return total;
+  });
+
+  const totalValueOrder: number = totalValues.reduce(
+    (prev, next) => prev + next
+  );
   const order: any = {
     menu: findMenu!,
     order_type: orderData.order_type,
-    products: findProducts,
+    products: findProducts!,
     address: findAddressClient!,
     client: findClient!,
     establish: findEstablish,
-    total: totalPrice,
+    total: totalValueOrder,
   };
 
-  console.log(order);
-  const newOrder = orderRepository.create(order);
-  await orderRepository.save(newOrder);
+  // console.log(findProducts);
+  const newOrder: any = orderRepository.create(order);
+
+  const orderSaved: Order = await orderRepository.save(newOrder);
+  orderQuantities.forEach(async (prod) => {
+    const order_products = orderproductRepository.create({
+      order: orderSaved,
+      product: prod,
+      quantity: prod.quantity,
+    });
+    await orderproductRepository.save(order_products);
+  });
 
   const returnOrder = returnOrderSchema.parse({
     ...newOrder,
-    productsOrder: [...findProducts],
+    orderProducts: [...orderQuantities],
   });
   return returnOrder;
 };

@@ -24,7 +24,6 @@ export const updateOrderService = async (
       client: true,
       menu: true,
       establish: true,
-      products: true,
     },
   });
   const findClient: Client | null = await clientRepository.findOne({
@@ -58,7 +57,7 @@ export const updateOrderService = async (
       return prev + next.price * manys.length;
     }, 0);
     findOrder!.total = totalPrice;
-    findOrder!.products = findProducts;
+    // findOrder! = findProducts;
   }
 
   const updateOrder: any = {
@@ -68,7 +67,7 @@ export const updateOrderService = async (
   await orderRepository.save(updateOrder);
   const returnOrder = returnOrderSchema.parse({
     ...updateOrder,
-    productsOrder: [...findOrder!.products],
+    // productsOrder: [...findOrder!],
     client: findClient,
   });
   return returnOrder;

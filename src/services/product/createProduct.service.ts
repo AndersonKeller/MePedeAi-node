@@ -30,6 +30,7 @@ export const createProductService = async (
     description: productData.description,
     establish: findEstablish!,
     price: productData.price,
+    quantity: productData.quantity,
   });
   await productRepository.save(product);
 

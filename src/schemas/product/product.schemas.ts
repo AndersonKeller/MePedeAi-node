@@ -7,6 +7,7 @@ export const createProductSchema = z.object({
   description: z.string(),
   typeProduct: z.string(),
   price: z.number(),
+  quantity: z.number(),
 });
 
 export const returnProductSchema = createProductSchema
