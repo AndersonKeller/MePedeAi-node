@@ -14,7 +14,7 @@ export const updateOrderController = async (
 ): Promise<Response> => {
   const orderData = req.body;
   const orderId: number = parseInt(req.params.id);
-  const clientId: string = req.user.id;
-  const order: iOrder = await updateOrderService(orderData, orderId, clientId);
+
+  const order: iOrder = await updateOrderService(orderData, orderId);
   return res.status(200).json(order);
 };

@@ -9,6 +9,8 @@ import {
   createOrderSchema,
   updateOrderSchema,
 } from "../schemas/order/order.schemas";
+import { ensureTokenvalidMiddleware } from "../middleware/ensureTokenIsValid.middleware";
+import { ensureOrderExistsMiddleware } from "../middleware/ensureOrderExists.middleware";
 
 export const orderRoutes: Router = Router();
 orderRoutes.post(
@@ -19,7 +21,8 @@ orderRoutes.post(
 );
 orderRoutes.patch(
   "/:id",
-  ensureTokenClientIsValidMiddleware,
+  ensureTokenvalidMiddleware,
+  ensureOrderExistsMiddleware,
   ensureDataIsValidMiddleware(updateOrderSchema),
   updateOrderController
 );

@@ -7,22 +7,14 @@ import { returnOrderSchema } from "../../schemas/order/order.schemas";
 
 export const updateOrderService = async (
   orderData: UpdateOrder,
-  orderId: number,
-  clientId: string
+  orderId: number
 ): Promise<any> => {
   const orderRepository: Repository<Order> = AppDataSource.getRepository(Order);
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
   const productRepository: Repository<Product> =
     AppDataSource.getRepository(Product);
-  const findClient: Client | null = await clientRepository.findOne({
-    where: {
-      id: clientId,
-    },
-    relations: {
-      address: true,
-    },
-  });
+
   const findOrder: Order | null = await orderRepository.findOne({
     where: {
       id: orderId,
@@ -33,6 +25,14 @@ export const updateOrderService = async (
       menu: true,
       establish: true,
       products: true,
+    },
+  });
+  const findClient: Client | null = await clientRepository.findOne({
+    where: {
+      id: findOrder!.client.id,
+    },
+    relations: {
+      address: true,
     },
   });
   if (orderData.products) {
@@ -60,9 +60,7 @@ export const updateOrderService = async (
     findOrder!.total = totalPrice;
     findOrder!.products = findProducts;
   }
-  if (!findOrder) {
-    throw new AppError("Order whit id not found");
-  }
+
   const updateOrder: any = {
     ...findOrder,
     ...orderData,
@@ -70,7 +68,7 @@ export const updateOrderService = async (
   await orderRepository.save(updateOrder);
   const returnOrder = returnOrderSchema.parse({
     ...updateOrder,
-    productsOrder: [...findOrder.products],
+    productsOrder: [...findOrder!.products],
     client: findClient,
   });
   return returnOrder;
