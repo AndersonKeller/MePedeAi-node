@@ -22,7 +22,7 @@ class Client {
   name: string;
   @Column({ length: 12 })
   phone: string;
-  @Column({ length: 45, unique: true })
+  @Column({ length: 45 })
   email: string;
 
   @Column({ length: 120 })

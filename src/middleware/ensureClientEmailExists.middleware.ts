@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { Client, Establish } from "../entities";
@@ -16,6 +16,9 @@ export async function ensureClientEmailExistsMiddleware(
 
   const findClient: Client | null = await clientRepository.findOneBy({
     email: req.body.email,
+    establish: {
+      id: String(req.query.establish!),
+    },
   });
   if (req.body.email) {
     if (findClient) {

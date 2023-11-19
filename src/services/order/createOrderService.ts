@@ -1,4 +1,5 @@
 import { In, Repository } from "typeorm";
+import { AppDataSource } from "../../data-source";
 import {
   Addresses,
   Client,
@@ -9,10 +10,8 @@ import {
   Product,
 } from "../../entities";
 import { CreateOrder, iOrder } from "../../interfaces/order/order.interfaces";
-import { AppDataSource } from "../../data-source";
 
 import { returnOrderSchema } from "../../schemas/order/order.schemas";
-import { iProduct } from "../../interfaces/product/product.interfaces";
 
 export const createOrderService = async (
   orderData: CreateOrder,

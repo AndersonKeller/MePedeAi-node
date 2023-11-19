@@ -1,4 +1,3 @@
-import * as express from "express";
 enum typeUser {
   establish = "establish",
   client = "client",
@@ -10,6 +9,7 @@ declare global {
         id: string;
         admin: boolean;
         type: typeUser;
+        establishId: string;
       };
     }
   }

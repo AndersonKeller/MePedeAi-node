@@ -2,19 +2,19 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Client, Menu } from "../../entities";
 import { iClient } from "../../interfaces/client/client.interfaces";
-import { triggerAsyncId } from "async_hooks";
-import { returnMenuClientSchema } from "../../schemas/menu/menu.schemas";
 import { iMenuClient } from "../../interfaces/menu/menu.interfaces";
+import { returnMenuClientSchema } from "../../schemas/menu/menu.schemas";
 
 export const getMenuClientService = async (
   admin: boolean,
   id: string,
-  type: string
+  type: string,
+  establishId: string
 ): Promise<iMenuClient> => {
   const menuRepository: Repository<Menu> = AppDataSource.getRepository(Menu);
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
-  const findClient: any | null = await clientRepository.findOne({
+  const findClient: iClient | null = await clientRepository.findOne({
     where: {
       id: String(id),
     },
@@ -22,15 +22,20 @@ export const getMenuClientService = async (
       establish: true,
     },
   });
+  console.log("establishId");
+  console.log(findClient);
   const menu: Menu | null | undefined = await menuRepository.findOne({
     where: {
-      establish: findClient!.establish,
+      establish: {
+        id: findClient!.establish.id,
+      },
     },
     relations: {
       product: { type: true },
       establish: true,
     },
   });
+  // console.log(menu);
   const returnMenu = returnMenuClientSchema.parse(menu);
   return returnMenu;
 };

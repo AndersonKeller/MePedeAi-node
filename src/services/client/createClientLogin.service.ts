@@ -1,18 +1,22 @@
-import { Repository } from "typeorm";
-import { iLogin } from "../../interfaces/login/login.interfaces";
-import { Client } from "../../entities";
 import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
+import { Client } from "../../entities";
 import { AppError } from "../../errors";
+import { iLogin } from "../../interfaces/login/login.interfaces";
 
 export const createClientLoginService = async (
-  loginData: iLogin
+  loginData: iLogin,
+  establishID: string
 ): Promise<string> => {
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
   const client: Client | null = await clientRepository.findOneBy({
     email: loginData.email,
+    establish: {
+      id: establishID,
+    },
   });
   if (!client) {
     throw new AppError("Invalid credentials", 401);
@@ -25,6 +29,7 @@ export const createClientLoginService = async (
     {
       admin: false,
       type: "client",
+      establishId: establishID!,
     },
     process.env.SECRET_KEY!,
     {
@@ -32,5 +37,6 @@ export const createClientLoginService = async (
       subject: String(client.id),
     }
   );
+
   return token;
 };

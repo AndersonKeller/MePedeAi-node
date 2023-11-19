@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
-import { Establish, Product, TypeProduct } from "../../entities";
 import { AppDataSource } from "../../data-source";
+import { Product } from "../../entities";
 
 export const getAllProductsService = async (
   establishId: string
@@ -9,6 +9,11 @@ export const getAllProductsService = async (
     AppDataSource.getRepository(Product);
 
   const products: Product[] | null = await productRepository.find({
+    where: {
+      establish: {
+        id: establishId,
+      },
+    },
     relations: {
       type: true,
     },
