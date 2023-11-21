@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import { AppError } from "../errors";
-import jwt from "jsonwebtoken";
 import "dotenv/config";
+import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import { AppError } from "../errors";
 export const ensureTokenvalidMiddleware = async (
   request: Request,
   response: Response,
@@ -24,6 +24,7 @@ export const ensureTokenvalidMiddleware = async (
       admin: decoded.admin,
       id: decoded.sub,
       type: decoded.type,
+      establishId: decoded.establishId,
     };
   });
   return next();

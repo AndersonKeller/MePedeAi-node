@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { Establish, Product } from "../entities";
@@ -25,7 +25,7 @@ export async function createMenuMiddleware(
       type: true,
     },
   });
-  console.log(products);
+
   req.body.product = [...products];
   req.body.establish = findEstablish;
   return next();

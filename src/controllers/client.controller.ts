@@ -32,7 +32,7 @@ export const getMenuClientController = async (
     admin,
     id,
     type,
-    establishId
+    establishId!
   );
   return res.status(200).json(menu);
 };

@@ -1,15 +1,12 @@
-enum typeUser {
-  establish = "establish",
-  client = "client",
-}
+export {};
 declare global {
   namespace Express {
-    interface Request {
+    export interface Request {
       user: {
         id: string;
         admin: boolean;
-        type: typeUser;
-        establishId: string;
+        type: string;
+        establishId?: string;
       };
     }
   }

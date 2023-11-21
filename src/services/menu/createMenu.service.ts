@@ -1,13 +1,12 @@
 import { Repository } from "typeorm";
+import { AppDataSource } from "../../data-source";
 import { Establish, Menu } from "../../entities";
 import { CreateMenu } from "../../interfaces/menu/menu.interfaces";
-import { AppDataSource } from "../../data-source";
-import { returnMenuSchema } from "../../schemas/menu/menu.schemas";
 
 export const createMenuService = async (
   menuData: CreateMenu,
   establishId: string
-): Promise<Menu> => {
+): Promise<Menu | Menu[]> => {
   const menuRepository: Repository<Menu> = AppDataSource.getRepository(Menu);
   const establishRepository: Repository<Establish> =
     AppDataSource.getRepository(Establish);
@@ -26,7 +25,6 @@ export const createMenuService = async (
   if (findMenu) {
     const newMenu: any = {
       ...findMenu,
-
       ...menuData,
     };
     await menuRepository.save(newMenu);
