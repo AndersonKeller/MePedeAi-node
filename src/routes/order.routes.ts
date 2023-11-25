@@ -1,17 +1,18 @@
 import { Router } from "express";
 import {
   createOrderController,
+  getAllOrdersController,
   getOrderByIdController,
   updateOrderController,
 } from "../controllers/order.controller";
-import { ensureTokenClientIsValidMiddleware } from "../middleware/enusureTokenClientIsValid.middleware";
 import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
+import { ensureOrderExistsMiddleware } from "../middleware/ensureOrderExists.middleware";
+import { ensureTokenvalidMiddleware } from "../middleware/ensureTokenIsValid.middleware";
+import { ensureTokenClientIsValidMiddleware } from "../middleware/enusureTokenClientIsValid.middleware";
 import {
   createOrderSchema,
   updateOrderSchema,
 } from "../schemas/order/order.schemas";
-import { ensureTokenvalidMiddleware } from "../middleware/ensureTokenIsValid.middleware";
-import { ensureOrderExistsMiddleware } from "../middleware/ensureOrderExists.middleware";
 
 export const orderRoutes: Router = Router();
 orderRoutes.post(
@@ -27,4 +28,5 @@ orderRoutes.patch(
   ensureDataIsValidMiddleware(updateOrderSchema),
   updateOrderController
 );
+orderRoutes.get("/", ensureTokenvalidMiddleware, getAllOrdersController);
 orderRoutes.get("/:id", ensureTokenvalidMiddleware, getOrderByIdController);

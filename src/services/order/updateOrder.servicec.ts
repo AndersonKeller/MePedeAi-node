@@ -1,14 +1,14 @@
 import { In, Repository } from "typeorm";
-import { UpdateOrder } from "../../interfaces/order/order.interfaces";
-import { Client, Order, Product } from "../../entities";
 import { AppDataSource } from "../../data-source";
-import { AppError } from "../../errors";
+import { Client, Order, Product } from "../../entities";
+import { UpdateOrder, iOrder } from "../../interfaces/order/order.interfaces";
+
 import { returnOrderSchema } from "../../schemas/order/order.schemas";
 
 export const updateOrderService = async (
   orderData: UpdateOrder,
   orderId: number
-): Promise<any> => {
+): Promise<iOrder> => {
   const orderRepository: Repository<Order> = AppDataSource.getRepository(Order);
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
@@ -32,6 +32,7 @@ export const updateOrderService = async (
     },
     relations: {
       address: true,
+      establish: true,
     },
   });
   if (orderData.products) {
@@ -69,6 +70,7 @@ export const updateOrderService = async (
     ...updateOrder,
     // productsOrder: [...findOrder!],
     client: findClient,
+    // establish: findClient!.establish,
   });
   return returnOrder;
 };
