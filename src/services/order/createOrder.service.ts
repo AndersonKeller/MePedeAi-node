@@ -96,8 +96,9 @@ export const createOrderService = async (
   const order: any = {
     menu: findMenu!,
     order_type: orderData.order_type,
-    products: findProducts!,
-    address: findAddressClient!,
+    orderProducts: findProducts!,
+    address:
+      orderData.order_type == "delivery" ? findAddressClient! : undefined,
     client: findClient!,
     establish: findEstablish,
     total: totalValueOrder,
