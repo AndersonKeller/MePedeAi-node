@@ -17,7 +17,7 @@ export async function ensureOrderExistsMiddleware(
     },
   });
   if (!findOrder) {
-    throw new AppError("Order whit id not found");
+    throw new AppError("Order whit id not found", 404);
   }
 
   return next();

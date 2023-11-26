@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { returnTypeProductSchema } from "../typeProduct/typeProduct.schemas";
 import { returnEstablishSchema } from "../establish/establish.schemas";
+import { returnTypeProductSchema } from "../typeProduct/typeProduct.schemas";
 
 export const createProductSchema = z.object({
   name: z.string().max(45),
@@ -17,3 +17,4 @@ export const returnProductSchema = createProductSchema
     establish: returnEstablishSchema,
   })
   .omit({ typeProduct: true });
+export const updateProductSchema = createProductSchema.optional();

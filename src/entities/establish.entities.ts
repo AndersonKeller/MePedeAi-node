@@ -1,16 +1,14 @@
-import { hashSync, getRounds } from "bcryptjs";
+import { getRounds, hashSync } from "bcryptjs";
 import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  DeleteDateColumn,
   BeforeInsert,
   BeforeUpdate,
-  ManyToMany,
-  JoinTable,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
   OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Client } from "./client.entities";
 
