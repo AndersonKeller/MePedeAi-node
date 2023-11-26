@@ -7,7 +7,7 @@ export const updateProductByIdService = async (
   productData: UpdateProduct,
   productId: number,
   establishId: string
-): Promise<any> => {
+): Promise<Product> => {
   const productRepository: Repository<Product> =
     AppDataSource.getRepository(Product);
   const typeProductRepository: Repository<TypeProduct> =

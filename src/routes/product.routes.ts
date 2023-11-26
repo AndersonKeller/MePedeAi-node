@@ -9,7 +9,10 @@ import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.mid
 import { ensureProductExistMiddleware } from "../middleware/ensureProductExists.middleware";
 import { ensureTokenvalidMiddleware } from "../middleware/ensureTokenIsValid.middleware";
 import { ensureTypeProductExistsMiddleware } from "../middleware/ensureTypeProductExists.middleware";
-import { createProductSchema } from "../schemas/product/product.schemas";
+import {
+  createProductSchema,
+  updateProductSchema,
+} from "../schemas/product/product.schemas";
 
 export const productRoutes: Router = Router();
 
@@ -30,6 +33,7 @@ productRoutes.get(
 productRoutes.patch(
   "/:id",
   ensureTokenvalidMiddleware,
+  ensureDataIsValidMiddleware(updateProductSchema),
   ensureProductExistMiddleware,
   ensureTypeProductExistsMiddleware,
   updateProductByIdController

@@ -9,3 +9,4 @@ export const returnTypeProductSchema = createTypeProductSchema.extend({
   id: z.number(),
   establish: returnEstablishSchema,
 });
+export const updateTypeProductSchema = createTypeProductSchema.partial();

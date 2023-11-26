@@ -24,5 +24,17 @@ export const ensureTypeProductExistsMiddleware = async (
       throw new AppError("Type of Product not exists", 404);
     }
   }
+  if (req.baseUrl == "/type-product" && req.params.id) {
+    const findType: TypeProduct | null = await typeProductRepository.findOne({
+      where: {
+        id: parseInt(req.params.id),
+        establish: { id: req.user.id },
+      },
+    });
+    // console.log(findType);
+    if (!findType) {
+      throw new AppError("Type of Product not exists", 404);
+    }
+  }
   return next();
 };

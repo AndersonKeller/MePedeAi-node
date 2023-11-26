@@ -17,4 +17,4 @@ export const returnProductSchema = createProductSchema
     establish: returnEstablishSchema,
   })
   .omit({ typeProduct: true });
-export const updateProductSchema = createProductSchema.optional();
+export const updateProductSchema = createProductSchema.partial();
