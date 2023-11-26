@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createTypeProductController,
   getAllTypeProductsController,
+  getTypeProductByIdController,
   updateTypeProductByIdController,
 } from "../controllers/typeProduct.controller";
 import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
@@ -24,6 +25,12 @@ typeProductRoutes.get(
   "",
   ensureTokenvalidMiddleware,
   getAllTypeProductsController
+);
+typeProductRoutes.get(
+  "/:id",
+  ensureTokenvalidMiddleware,
+  ensureTypeProductExistsMiddleware,
+  getTypeProductByIdController
 );
 typeProductRoutes.patch(
   "/:id",

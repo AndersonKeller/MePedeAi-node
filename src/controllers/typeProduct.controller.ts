@@ -3,6 +3,7 @@ import { TypeProduct } from "../entities";
 import { iTypeProduct } from "../interfaces/typeProduct/typeProduct.interfaces";
 import { createTypeProductService } from "../services/typeProduct/createTypeProduct.service";
 import { getAllTypeProductsService } from "../services/typeProduct/getAllTypeProducts.service";
+import { getTypeProductByIdService } from "../services/typeProduct/getTypeProductById.service";
 import { upadteTypeProductByIdService } from "../services/typeProduct/updateTypeProductById.service";
 import {
   CreateTypeProduct,
@@ -32,13 +33,24 @@ export const getAllTypeProductsController = async (
   return res.status(200).json(typeProducts);
 };
 
+export const getTypeProductByIdController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const typeProductId: number = parseInt(req.params.id);
+  const typeProduct: iTypeProduct = await getTypeProductByIdService(
+    typeProductId
+  );
+  return res.status(200).json(typeProduct);
+};
+
 export const updateTypeProductByIdController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   const typeProductId: number = parseInt(req.params.id);
   const typeProductData: UpdateTypeProduct = req.body;
-  const typeProduct: TypeProduct = await upadteTypeProductByIdService(
+  const typeProduct: iTypeProduct = await upadteTypeProductByIdService(
     typeProductId,
     typeProductData
   );
