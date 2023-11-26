@@ -1,14 +1,12 @@
 import { In, Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Client, Order, Product } from "../../entities";
-import { UpdateOrder, iOrder } from "../../interfaces/order/order.interfaces";
-
-import { returnOrderSchema } from "../../schemas/order/order.schemas";
+import { UpdateOrder } from "../../interfaces/order/order.interfaces";
 
 export const updateOrderService = async (
   orderData: UpdateOrder,
   orderId: number
-): Promise<iOrder> => {
+): Promise<Order> => {
   const orderRepository: Repository<Order> = AppDataSource.getRepository(Order);
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
@@ -23,16 +21,7 @@ export const updateOrderService = async (
       address: true,
       client: true,
       menu: true,
-      establish: true,
-    },
-  });
-  const findClient: Client | null = await clientRepository.findOne({
-    where: {
-      id: findOrder!.client.id,
-    },
-    relations: {
-      address: true,
-      establish: true,
+      orderProducts: { product: { type: true } },
     },
   });
   if (orderData.products) {
@@ -41,7 +30,7 @@ export const updateOrderService = async (
     );
     const findProducts: Product[] | null = await productRepository.find({
       where: {
-        id: In(orderData.products.map((prod) => prod.id)),
+        id: In(ids),
       },
       cache: false,
       relations: {
@@ -58,19 +47,29 @@ export const updateOrderService = async (
       return prev + next.price * manys.length;
     }, 0);
     findOrder!.total = totalPrice;
-    // findOrder! = findProducts;
+
+    findOrder!.orderProducts.map((order) => {
+      console.log("order", order);
+      orderData.products?.forEach((data) => {
+        if (order.product.id == data.id) {
+          order.product.quantity = data.quantity!;
+        } else {
+          const findProd: any | undefined = findProducts.find((item) => {
+            return item.id == data.id;
+          });
+          if (findProd) {
+            findProd.quantity = data.quantity!;
+            findOrder?.orderProducts.push(findProd);
+          }
+        }
+      });
+
+      return order;
+    });
   }
 
-  const updateOrder: any = {
-    ...findOrder,
-    ...orderData,
-  };
-  await orderRepository.save(updateOrder);
-  const returnOrder = returnOrderSchema.parse({
-    ...updateOrder,
-    // productsOrder: [...findOrder!],
-    client: findClient,
-    // establish: findClient!.establish,
-  });
-  return returnOrder;
+  await orderRepository.save(findOrder!);
+
+  // const returnOrder = returnOrderSchema.parse(findOrder);
+  return findOrder!;
 };

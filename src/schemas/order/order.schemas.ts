@@ -23,6 +23,7 @@ export const returnOrderSchema = createOrderSchema
     client: returnClientSchema.omit({
       establish: true,
       id: true,
+      address: true,
     }),
   })
   .omit({ products: true });
