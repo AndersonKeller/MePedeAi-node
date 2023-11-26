@@ -36,9 +36,11 @@ export const updateProductByIdController = async (
   res: Response
 ): Promise<Response> => {
   const productData: UpdateProduct = req.body;
+  const establishId: string = req.user.id;
   const product: Product = await updateProductByIdService(
     productData,
-    parseInt(req.params.id)
+    parseInt(req.params.id),
+    establishId
   );
   return res.status(201).json(product);
 };

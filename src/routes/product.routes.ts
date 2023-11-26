@@ -30,5 +30,7 @@ productRoutes.get(
 productRoutes.patch(
   "/:id",
   ensureTokenvalidMiddleware,
+  ensureProductExistMiddleware,
+  ensureTypeProductExistsMiddleware,
   updateProductByIdController
 );
