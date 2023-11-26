@@ -37,7 +37,7 @@ export const getOrderByIdService = async (orderId: number): Promise<any> => {
 
     client: findClient!,
   };
-  console.log(findOrder);
+
   // const order = returnOrderSchema.parse(returnOrder);
   return returnOrder;
 };
