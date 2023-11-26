@@ -15,6 +15,9 @@ export async function ensureProductExistMiddleware(
   const findProduct: Product | null = await productRepository.findOne({
     where: {
       id: parseInt(req.params.id),
+      establish: {
+        id: req.user.id,
+      },
     },
   });
   if (!findProduct) {
