@@ -43,6 +43,6 @@ export const createShopService = async (
       });
   await shopRepository.save(shop);
 
-  const newShop = returnShopSchema.parse(shop);
+  const newShop: iShop = returnShopSchema.parse(shop);
   return newShop;
 };
