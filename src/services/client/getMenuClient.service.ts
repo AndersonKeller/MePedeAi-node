@@ -22,8 +22,8 @@ export const getMenuClientService = async (
       establish: true,
     },
   });
-  console.log("establishId");
-  console.log(findClient);
+
+
   const menu: Menu | null | undefined = await menuRepository.findOne({
     where: {
       establish: {

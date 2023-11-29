@@ -18,10 +18,9 @@ export const getMenuByEstablishController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  console.log("controller");
   const establishId: string = req.params.id;
-  console.log(establishId);
+
   const menu: Menu = await getMenuByEstablishService(establishId);
-  console.log(menu);
+
   return res.status(200).json(menu);
 };
