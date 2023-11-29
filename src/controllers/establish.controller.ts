@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { createEstablishService } from "../services/establish/createEstablish.service";
 
 import { Establish } from "../entities";
-import { iEstablish } from "../interfaces/establish/establish.interfaces";
+import { iEstablish } from "../interfaces/establish.interfaces";
 import { retriveOwnerService } from "../services/establish/retrieveOwner.service";
 export const createEstablishController = async (
   req: Request,

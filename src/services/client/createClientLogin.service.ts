@@ -4,7 +4,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Client } from "../../entities";
 import { AppError } from "../../errors";
-import { iLogin } from "../../interfaces/login/login.interfaces";
+import { iLogin } from "../../interfaces/login.interfaces";
 
 export const createClientLoginService = async (
   loginData: iLogin,

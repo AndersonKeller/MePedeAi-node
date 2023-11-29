@@ -1,9 +1,9 @@
 import { z } from "zod";
 
-import { returnAddressSchema } from "../address/address.schemas";
-import { returnClientSchema } from "../client/client.schemas";
-import { returnMenuSchema } from "../menu/menu.schemas";
-import { returnProductSchema } from "../product/product.schemas";
+import { returnAddressSchema } from "./address.schemas";
+import { returnClientSchema } from "./client.schemas";
+import { returnMenuSchema } from "./menu.schemas";
+import { returnProductSchema } from "./product.schemas";
 export enum orderType {
   delivery = "delivery",
   take = "take",

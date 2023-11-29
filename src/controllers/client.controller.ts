@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { iClient } from "../interfaces/client/client.interfaces";
-import { iMenuClient } from "../interfaces/menu/menu.interfaces";
+import { iClient } from "../interfaces/client.interfaces";
+import { iMenuClient } from "../interfaces/menu.interfaces";
 import { createClientService } from "../services/client/createClient.service";
 import { createClientLoginService } from "../services/client/createClientLogin.service";
 import { getMenuClientService } from "../services/client/getMenuClient.service";

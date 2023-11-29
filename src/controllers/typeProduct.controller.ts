@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import { TypeProduct } from "../entities";
-import { iTypeProduct } from "../interfaces/typeProduct/typeProduct.interfaces";
+import {
+  CreateTypeProduct,
+  UpdateTypeProduct,
+  iTypeProduct,
+} from "../interfaces/typeProduct.interfaces";
 import { createTypeProductService } from "../services/typeProduct/createTypeProduct.service";
 import { getAllTypeProductsService } from "../services/typeProduct/getAllTypeProducts.service";
 import { getTypeProductByIdService } from "../services/typeProduct/getTypeProductById.service";
 import { upadteTypeProductByIdService } from "../services/typeProduct/updateTypeProductById.service";
-import {
-  CreateTypeProduct,
-  UpdateTypeProduct,
-} from "./../interfaces/typeProduct/typeProduct.interfaces";
 
 export const createTypeProductController = async (
   req: Request,

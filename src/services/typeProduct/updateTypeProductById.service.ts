@@ -4,8 +4,8 @@ import { TypeProduct } from "../../entities";
 import {
   UpdateTypeProduct,
   iTypeProduct,
-} from "../../interfaces/typeProduct/typeProduct.interfaces";
-import { returnTypeProductSchema } from "../../schemas/typeProduct/typeProduct.schemas";
+} from "../../interfaces/typeProduct.interfaces";
+import { returnTypeProductSchema } from "../../schemas/typeProduct.schemas";
 
 export const upadteTypeProductByIdService = async (
   typeProductId: number,

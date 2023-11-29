@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { ensureTokenvalidMiddleware } from "../middleware/ensureTokenIsValid.middleware";
-import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
-import { createMenuSchema } from "../schemas/menu/menu.schemas";
 import {
   createMenuController,
   getMenuByEstablishController,
 } from "../controllers/menu.controller";
 import { createMenuMiddleware } from "../middleware/createMenu.middleware";
+import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
+import { ensureTokenvalidMiddleware } from "../middleware/ensureTokenIsValid.middleware";
+import { createMenuSchema } from "../schemas/menu.schemas";
 
 export const menuRoutes: Router = Router();
 

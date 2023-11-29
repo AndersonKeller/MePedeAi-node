@@ -7,8 +7,8 @@ import {
 import { ensureClientEmailExistsMiddleware } from "../middleware/ensureClientEmailExists.middleware";
 import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
 import { ensureTokenClientIsValidMiddleware } from "../middleware/enusureTokenClientIsValid.middleware";
-import { createClientSchema } from "../schemas/client/client.schemas";
-import { createLoginSchema } from "../schemas/login/login.schemas";
+import { createClientSchema } from "../schemas/client.schemas";
+import { createLoginSchema } from "../schemas/login.schemas";
 
 export const clientRoutes: Router = Router();
 

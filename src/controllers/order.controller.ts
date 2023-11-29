@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { iOrder } from "../interfaces/order/order.interfaces";
+import { iOrder } from "../interfaces/order.interfaces";
 import { createOrderService } from "../services/order/createOrder.service";
 import { getOrderByIdService } from "../services/order/getOrderById.service";
 import { getAllOrdersService } from "./../services/order/getAllOrders.service";

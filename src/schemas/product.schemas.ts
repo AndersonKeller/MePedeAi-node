@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { returnEstablishSchema } from "../establish/establish.schemas";
-import { returnTypeProductSchema } from "../typeProduct/typeProduct.schemas";
+import { returnEstablishSchema } from "./establish.schemas";
+import { returnTypeProductSchema } from "./typeProduct.schemas";
 
 export const createProductSchema = z.object({
   name: z.string().max(45),

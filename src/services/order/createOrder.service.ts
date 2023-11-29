@@ -9,9 +9,9 @@ import {
   OrderProducts,
   Product,
 } from "../../entities";
-import { CreateOrder, iOrder } from "../../interfaces/order/order.interfaces";
+import { CreateOrder, iOrder } from "../../interfaces/order.interfaces";
 
-import { returnOrderSchema } from "../../schemas/order/order.schemas";
+import { returnOrderSchema } from "../../schemas/order.schemas";
 
 export const createOrderService = async (
   orderData: CreateOrder,

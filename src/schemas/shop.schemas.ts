@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { returnEstablishSchema } from "../establish/establish.schemas";
+import { returnEstablishSchema } from "./establish.schemas";
 
 export const createShopSchema = z.object({
   url: z.string(),

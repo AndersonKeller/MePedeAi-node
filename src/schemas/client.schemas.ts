@@ -1,12 +1,6 @@
 import { z } from "zod";
-import {
-  createAddressSchema,
-  returnAddressSchema,
-} from "../address/address.schemas";
-import {
-  createEstablishSchema,
-  returnEstablishSchema,
-} from "../establish/establish.schemas";
+import { createAddressSchema, returnAddressSchema } from "./address.schemas";
+import { returnEstablishSchema } from "./establish.schemas";
 
 export const createClientSchema = z.object({
   name: z.string().max(45, "Name max length is 45 characters"),

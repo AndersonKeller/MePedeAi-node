@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Establish } from "../../entities";
-import { returnEstablishSchema } from "../../schemas/establish/establish.schemas";
+import { returnEstablishSchema } from "../../schemas/establish.schemas";
 
 export const retriveOwnerService = async (
   establishId: string

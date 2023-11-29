@@ -12,7 +12,7 @@ import { ensureTypeProductExistsMiddleware } from "../middleware/ensureTypeProdu
 import {
   createProductSchema,
   updateProductSchema,
-} from "../schemas/product/product.schemas";
+} from "../schemas/product.schemas";
 
 export const productRoutes: Router = Router();
 

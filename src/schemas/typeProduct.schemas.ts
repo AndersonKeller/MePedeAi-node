@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { returnEstablishSchema } from "../establish/establish.schemas";
+import { returnEstablishSchema } from "./establish.schemas";
 
 export const createTypeProductSchema = z.object({
   name: z.string().max(45),

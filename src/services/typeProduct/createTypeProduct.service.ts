@@ -1,11 +1,11 @@
 import { Repository } from "typeorm";
+import { AppDataSource } from "../../data-source";
+import { Establish, TypeProduct } from "../../entities";
 import {
   CreateTypeProduct,
   iTypeProduct,
-} from "../../interfaces/typeProduct/typeProduct.interfaces";
-import { Establish, TypeProduct } from "../../entities";
-import { AppDataSource } from "../../data-source";
-import { returnTypeProductSchema } from "../../schemas/typeProduct/typeProduct.schemas";
+} from "../../interfaces/typeProduct.interfaces";
+import { returnTypeProductSchema } from "../../schemas/typeProduct.schemas";
 
 export const createTypeProductService = async (
   typeProductData: CreateTypeProduct,

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { returnEstablishSchema } from "../establish/establish.schemas";
-import { returnProductSchema } from "../product/product.schemas";
+import { returnEstablishSchema } from "./establish.schemas";
+import { returnProductSchema } from "./product.schemas";
 
 export const createMenuSchema = z.object({
   establish: returnEstablishSchema,

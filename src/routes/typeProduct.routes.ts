@@ -11,7 +11,7 @@ import { ensureTypeProductExistsMiddleware } from "../middleware/ensureTypeProdu
 import {
   createTypeProductSchema,
   updateTypeProductSchema,
-} from "../schemas/typeProduct/typeProduct.schemas";
+} from "../schemas/typeProduct.schemas";
 
 export const typeProductRoutes: Router = Router();
 

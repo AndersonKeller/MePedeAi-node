@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
-import { createEstablishSchema } from "../schemas/establish/establish.schemas";
 import {
   createEstablishController,
   retriveOwnerController,
 } from "../controllers/establish.controller";
+import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
 import { ensureEmailExistsMiddleware } from "../middleware/ensureEmailExists.middleware";
 import { ensureTokenvalidMiddleware } from "../middleware/ensureTokenIsValid.middleware";
+import { createEstablishSchema } from "../schemas/establish.schemas";
 export const establishRoutes: Router = Router();
 
 establishRoutes.post(

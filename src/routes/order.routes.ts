@@ -7,7 +7,7 @@ import {
 import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
 import { ensureTokenvalidMiddleware } from "../middleware/ensureTokenIsValid.middleware";
 import { ensureTokenClientIsValidMiddleware } from "../middleware/enusureTokenClientIsValid.middleware";
-import { createOrderSchema } from "../schemas/order/order.schemas";
+import { createOrderSchema } from "../schemas/order.schemas";
 
 export const orderRoutes: Router = Router();
 orderRoutes.post(

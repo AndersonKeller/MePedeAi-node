@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateShop, iShop } from "../interfaces/shop/shop.interfaces";
+import { CreateShop, iShop } from "../interfaces/shop.interfaces";
 import { createShopService } from "../services/shop/createShop.service";
 
 export const createShopController = async (

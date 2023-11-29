@@ -1,11 +1,5 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { stateType } from "../schemas/address/address.schemas";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { stateType } from "../schemas/address.schemas";
 import { Client } from "./client.entities";
 
 @Entity("addresses")

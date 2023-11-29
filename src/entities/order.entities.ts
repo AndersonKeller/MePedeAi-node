@@ -1,25 +1,16 @@
 import {
-  BeforeInsert,
-  BeforeUpdate,
   Column,
   Entity,
-  EntitySubscriberInterface,
-  EventSubscriber,
-  InsertEvent,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { orderType } from "../schemas/order.schemas";
+import { Addresses } from "./address.entities";
 import { Client } from "./client.entities";
 import { Establish } from "./establish.entities";
-import { Addresses } from "./address.entities";
 import { Menu } from "./menu.entities";
-import { Product } from "./product.entities";
-import { orderType } from "../schemas/order/order.schemas";
 import { OrderProducts } from "./orderProducts.entities";
 
 @Entity("order")

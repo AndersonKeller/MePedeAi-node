@@ -1,11 +1,11 @@
 import { Repository } from "typeorm";
+import { AppDataSource } from "../../data-source";
 import { Establish } from "../../entities";
 import {
   CreateEstablish,
   iEstablish,
-} from "../../interfaces/establish/establish.interfaces";
-import { AppDataSource } from "../../data-source";
-import { returnEstablishSchema } from "../../schemas/establish/establish.schemas";
+} from "../../interfaces/establish.interfaces";
+import { returnEstablishSchema } from "../../schemas/establish.schemas";
 
 export const createEstablishService = async (
   establishData: CreateEstablish

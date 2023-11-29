@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
-import { CreateProduct } from "../../interfaces/product/product.interfaces";
-import { Establish, Product, TypeProduct } from "../../entities";
 import { AppDataSource } from "../../data-source";
+import { Establish, Product, TypeProduct } from "../../entities";
+import { CreateProduct } from "../../interfaces/product.interfaces";
 
 export const createProductService = async (
   productData: CreateProduct,

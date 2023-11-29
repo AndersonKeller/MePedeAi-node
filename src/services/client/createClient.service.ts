@@ -1,12 +1,9 @@
 import { Repository } from "typeorm";
-import { Addresses, Client, Establish } from "../../entities";
-import {
-  CreateClient,
-  iClient,
-} from "../../interfaces/client/client.interfaces";
 import { AppDataSource } from "../../data-source";
-import { CreateAddress } from "../../interfaces/addresses/addresses.interfaces";
-import { returnClientSchema } from "../../schemas/client/client.schemas";
+import { Addresses, Client, Establish } from "../../entities";
+import { CreateAddress } from "../../interfaces/addresses.interfaces";
+import { CreateClient, iClient } from "../../interfaces/client.interfaces";
+import { returnClientSchema } from "../../schemas/client.schemas";
 
 export const createClientService = async (
   clientData: CreateClient
