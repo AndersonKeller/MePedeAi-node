@@ -11,7 +11,7 @@
     "dev": "ts-node-dev  --ignore-watch node_modules --cls --rs src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "migration:prod": "yarn typeorm migration:run -d dist/data-source.js"
+    "migration:prod": "npm typeorm migration:run -d dist/data-source.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
