@@ -23,6 +23,7 @@ export const getAllOrdersService = async (
         id: true,
       },
     },
+    order: { id: "DESC" },
   });
 
   return orders;

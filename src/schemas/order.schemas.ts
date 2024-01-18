@@ -21,8 +21,6 @@ export const returnOrderSchema = createOrderSchema
     total: z.number(),
     orderProducts: returnProductSchema.omit({ establish: true }).array(),
     client: returnClientSchema.omit({
-      establish: true,
-      id: true,
       address: true,
     }),
   })

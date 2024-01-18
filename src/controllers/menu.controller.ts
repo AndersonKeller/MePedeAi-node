@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Menu } from "../entities";
-import { CreateMenu } from "../interfaces/menu.interfaces";
+import { CreateMenu, iMenu } from "../interfaces/menu.interfaces";
 import { createMenuService } from "../services/menu/createMenu.service";
 import { getMenuByEstablishService } from "../services/menu/getMenuByEstablish.service";
 
@@ -10,7 +10,7 @@ export const createMenuController = async (
 ): Promise<Response> => {
   const menuData: CreateMenu = req.body;
   const establishId: string = req.user.id;
-  const menu: Menu | Menu[] = await createMenuService(menuData, establishId);
+  const menu: iMenu | iMenu[] = await createMenuService(menuData, establishId);
 
   return res.status(201).json(menu);
 };

@@ -1,12 +1,13 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Establish, Product, TypeProduct } from "../../entities";
-import { CreateProduct } from "../../interfaces/product.interfaces";
+import { CreateProduct, iProduct } from "../../interfaces/product.interfaces";
+import { returnProductSchema } from "../../schemas/product.schemas";
 
 export const createProductService = async (
   productData: CreateProduct,
   establishId: string
-): Promise<Product> => {
+): Promise<iProduct> => {
   const productRepository: Repository<Product> =
     AppDataSource.getRepository(Product);
   const establishRepository: Repository<Establish> =
@@ -33,6 +34,6 @@ export const createProductService = async (
     quantity: productData.quantity,
   });
   await productRepository.save(product);
-
-  return product;
+  const returnProduct = returnProductSchema.parse(product);
+  return returnProduct;
 };

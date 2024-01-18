@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Product } from "../entities";
-import { UpdateProduct } from "../interfaces/product.interfaces";
+import { UpdateProduct, iProduct } from "../interfaces/product.interfaces";
 import { createProductService } from "../services/product/createProduct.service";
 import { getAllProductsService } from "../services/product/getAllProducts.service";
 import { getProductByIdService } from "../services/product/getProductById.servicec";
@@ -11,7 +11,10 @@ export const createProductController = async (
 ): Promise<Response> => {
   const productData = req.body;
   const establishId: string = req.user.id;
-  const product: Product = await createProductService(productData, establishId);
+  const product: iProduct = await createProductService(
+    productData,
+    establishId
+  );
   return res.status(201).json(product);
 };
 export const getAllProductsController = async (

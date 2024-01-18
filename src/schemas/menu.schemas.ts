@@ -4,11 +4,13 @@ import { returnProductSchema } from "./product.schemas";
 
 export const createMenuSchema = z.object({
   establish: returnEstablishSchema,
-  product: returnProductSchema.array(),
+  product: returnProductSchema.omit({ establish: true }).array(),
 });
-export const returnMenuSchema = createMenuSchema.extend({
-  id: z.number(),
-});
+export const returnMenuSchema = createMenuSchema
+  .extend({
+    id: z.number(),
+  })
+  .omit({ establish: true });
 export const returnMenuClientSchema = z.object({
   id: z.number(),
   product: returnProductSchema.omit({ establish: true }).array(),
