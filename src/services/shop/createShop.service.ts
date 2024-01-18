@@ -18,8 +18,21 @@ export const createShopService = async (
     },
   });
   shopData.url = shopData.url
+    .split("")
+    .map((letter) => {
+      if (letter == "-") {
+        letter = " ";
+        console.log(letter);
+        return letter;
+      }
+      return letter;
+    })
+    .join("");
+
+  shopData.url = shopData.url
     .toLowerCase()
     .normalize("NFD")
+
     .replace(/[^\w\s]/gi, "")
     .split(" ")
     .join("-");
@@ -31,7 +44,7 @@ export const createShopService = async (
     },
   });
 
-  const shop: Shop = findShop
+  const shop: Shop[] | Shop = findShop
     ? shopRepository.create({
         ...findShop,
         ...shopData,
