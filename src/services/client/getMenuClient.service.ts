@@ -14,7 +14,7 @@ export const getMenuClientService = async (
   const menuRepository: Repository<Menu> = AppDataSource.getRepository(Menu);
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
-  const findClient: iClient | null = await clientRepository.findOne({
+  const findClient: Client | null = await clientRepository.findOne({
     where: {
       id: String(id),
     },

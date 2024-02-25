@@ -18,6 +18,6 @@ export const returnClientSchema = createClientSchema
     deletedAt: z.string().nullable(),
     address: returnAddressSchema,
   })
-  .omit({ password: true, addresses: true });
+  .omit({ password: true });
   export type CreateClient = z.infer<typeof createClientSchema>;
   export type iClient = z.infer<typeof returnClientSchema>;

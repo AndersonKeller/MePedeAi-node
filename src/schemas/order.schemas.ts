@@ -30,9 +30,7 @@ export const returnOrderSchema = createOrderSchema
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
     orderProducts: returnProductSchema.omit({ establish: true }).array(),
-    client: returnClientSchema.omit({
-      address: true,
-    }),
+    client: returnClientSchema.omit({establish:true})
   })
   .omit({ products: true });
 

@@ -1,11 +1,12 @@
+import { ensureTokenvalidMiddleware } from './../middleware/ensureTokenIsValid.middleware';
 import { Router } from "express";
 import {
   createOrderController,
   getAllOrdersController,
   getOrderByIdController,
+  updateStatusOrderController,
 } from "../controllers/order.controller";
 import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
-import { ensureTokenvalidMiddleware } from "../middleware/ensureTokenIsValid.middleware";
 import { ensureTokenClientIsValidMiddleware } from "../middleware/enusureTokenClientIsValid.middleware";
 import { createOrderSchema } from "../schemas/order.schemas";
 
@@ -19,3 +20,4 @@ orderRoutes.post(
 
 orderRoutes.get("/", ensureTokenvalidMiddleware, getAllOrdersController);
 orderRoutes.get("/:id", ensureTokenvalidMiddleware, getOrderByIdController);
+orderRoutes.patch("/:id/status", ensureTokenvalidMiddleware, updateStatusOrderController )

@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Client, Order } from "../../entities";
+import { returnOrderSchema } from "../../schemas/order.schemas";
 
 export const getOrderByIdService = async (orderId: number): Promise<any> => {
   const orderRepository: Repository<Order> = AppDataSource.getRepository(Order);
@@ -23,14 +24,8 @@ export const getOrderByIdService = async (orderId: number): Promise<any> => {
     where: {
       id: findOrder!.client.id,
     },
-    relations: {
-      address: true,
-    },
-    select: {
-      email: true,
-      id: true,
-      name: true,
-    },
+    
+    
   });
   const returnOrder = {
     ...findOrder,
@@ -38,6 +33,6 @@ export const getOrderByIdService = async (orderId: number): Promise<any> => {
     client: findClient!,
   };
 
-  // const order = returnOrderSchema.parse(returnOrder);
-  return returnOrder;
+  const order = returnOrderSchema.parse(returnOrder);
+  return order;
 };
