@@ -8,3 +8,6 @@ export const returnShopSchema = createShopSchema.extend({
   id: z.string(),
   establish: returnEstablishSchema,
 });
+
+export type CreateShop = z.infer<typeof createShopSchema>;
+export type iShop = z.infer<typeof returnShopSchema>;

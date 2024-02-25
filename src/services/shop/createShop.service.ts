@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Establish } from "../../entities";
 import { Shop } from "../../entities/shop.entities";
-import { CreateShop, iShop } from "../../interfaces/shop.interfaces";
+import { CreateShop, iShop } from "../../schemas/shop.schemas";
 import { returnShopSchema } from "../../schemas/shop.schemas";
 
 export const createShopService = async (

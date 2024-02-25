@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Establish, Menu } from "../../entities";
-import { CreateMenu, iMenu } from "../../interfaces/menu.interfaces";
-import { returnMenuSchema } from "../../schemas/menu.schemas";
+import { CreateMenu, iMenu, returnMenuSchema } from "../../schemas/menu.schemas";
+
 
 export const createMenuService = async (
   menuData: CreateMenu,

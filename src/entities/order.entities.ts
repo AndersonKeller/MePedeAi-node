@@ -1,12 +1,15 @@
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
-import { orderType } from "../schemas/order.schemas";
+import { orderType, statusOrder } from "../schemas/order.schemas";
 import { Addresses } from "./address.entities";
 import { Client } from "./client.entities";
 import { Establish } from "./establish.entities";
@@ -17,6 +20,21 @@ import { OrderProducts } from "./orderProducts.entities";
 class Order {
   @PrimaryGeneratedColumn("rowid")
   id: number;
+  
+  @Column({type: "enum", enum: statusOrder})
+  status: statusOrder
+
+  @Column({type: "varchar", nullable: true})
+  comments: string |null
+
+  @CreateDateColumn({ type: "date" })
+  createdAt: string;
+
+  @UpdateDateColumn({ type: "date" })
+  updatedAt: string;
+
+  @DeleteDateColumn({ type: "date", nullable: true })
+  deletedAt: string | null;
 
   @ManyToOne(() => Client)
   @JoinColumn()

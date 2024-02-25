@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Establish, Product, TypeProduct } from "../../entities";
-import { CreateProduct, iProduct } from "../../interfaces/product.interfaces";
-import { returnProductSchema } from "../../schemas/product.schemas";
+import { CreateProduct, iProduct, returnProductSchema } from "../../schemas/product.schemas";
+
 
 export const createProductService = async (
   productData: CreateProduct,

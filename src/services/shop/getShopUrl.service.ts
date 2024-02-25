@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Shop } from "../../entities/shop.entities";
-import { iShop } from "../../interfaces/shop.interfaces";
+import { iShop } from "../../schemas/shop.schemas";
 import { returnShopSchema } from "../../schemas/shop.schemas";
 
 export const getShopUrlService = async (shopUrl: string): Promise<iShop> => {

@@ -14,3 +14,5 @@ export const createAddressSchema = z.object({
 export const returnAddressSchema = createAddressSchema.extend({
   id: z.string().uuid(),
 });
+export type CreateAddress = z.infer<typeof createAddressSchema>;
+export type iAddress = z.infer<typeof returnAddressSchema>;

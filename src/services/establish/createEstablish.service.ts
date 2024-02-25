@@ -4,7 +4,7 @@ import { Establish } from "../../entities";
 import {
   CreateEstablish,
   iEstablish,
-} from "../../interfaces/establish.interfaces";
+} from "../../schemas/establish.schemas";
 import { returnEstablishSchema } from "../../schemas/establish.schemas";
 
 export const createEstablishService = async (

@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { TypeProduct } from "../../entities";
-import { iTypeProduct } from "../../interfaces/typeProduct.interfaces";
+import { iTypeProduct } from "../../schemas/typeProduct.schemas";
 import { returnTypeProductSchema } from "../../schemas/typeProduct.schemas";
 
 export const getTypeProductByIdService = async (

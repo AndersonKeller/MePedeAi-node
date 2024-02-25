@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Addresses, Client, Establish } from "../../entities";
-import { CreateAddress } from "../../interfaces/addresses.interfaces";
-import { CreateClient, iClient } from "../../interfaces/client.interfaces";
+import { CreateAddress } from "../../schemas/address.schemas";
+import { CreateClient, iClient } from "../../schemas/client.schemas";
 import { returnClientSchema } from "../../schemas/client.schemas";
 
 export const createClientService = async (

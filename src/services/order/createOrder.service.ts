@@ -9,9 +9,11 @@ import {
   OrderProducts,
   Product,
 } from "../../entities";
-import { CreateOrder, iOrder } from "../../interfaces/order.interfaces";
+import { CreateOrder, iOrder } from "../../schemas/order.schemas";
 
-import { returnOrderSchema } from "../../schemas/order.schemas";
+import { returnOrderSchema, statusOrder } from "../../schemas/order.schemas";
+import { AppError } from "../../errors";
+import { iProduct } from "../../schemas/product.schemas";
 
 export const createOrderService = async (
   orderData: CreateOrder,
@@ -74,7 +76,10 @@ export const createOrderService = async (
     },
   });
 
-  // console.log(findProducts);
+  console.log(findProducts);
+  if(findProducts.length !== orderData.products.length){
+    throw new AppError("Any product not found", 404)
+  }
   const orderQuantities = orderData.products.map((prod) => {
     const findProd: Product | undefined = findProducts.find(
       (prodFind) => prodFind.id == prod.id
@@ -102,12 +107,14 @@ export const createOrderService = async (
     client: findClient!,
     establish: findEstablish,
     total: totalValueOrder,
+    status: statusOrder.pending,
+    comments: orderData.comments
   };
 
   // console.log(findProducts);
   const newOrder: any = orderRepository.create(order);
 
-  const orderSaved: Order = await orderRepository.save(newOrder);
+  const orderSaved: any = await orderRepository.save(newOrder);
   orderQuantities.forEach(async (prod) => {
     const order_products = orderproductRepository.create({
       order: orderSaved,

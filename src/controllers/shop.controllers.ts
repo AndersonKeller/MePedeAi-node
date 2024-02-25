@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateShop, iShop } from "../interfaces/shop.interfaces";
+import { CreateShop, iShop } from "../schemas/shop.schemas";
 import { createShopService } from "../services/shop/createShop.service";
 import { getMyShopUrlService } from "../services/shop/getMyShop.service";
 import { getShopUrlService } from "../services/shop/getShopUrl.service";

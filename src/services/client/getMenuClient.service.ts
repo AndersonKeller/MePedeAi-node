@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Client, Menu } from "../../entities";
-import { iClient } from "../../interfaces/client.interfaces";
-import { iMenuClient } from "../../interfaces/menu.interfaces";
+import { iClient } from "../../schemas/client.schemas";
+import { iMenuClient } from "../../schemas/menu.schemas";
 import { returnMenuClientSchema } from "../../schemas/menu.schemas";
 
 export const getMenuClientService = async (

@@ -8,7 +8,7 @@ export const createClientSchema = z.object({
   email: z.string().email("Email wrong format"),
   password: z.string().max(120),
   addresses: createAddressSchema,
-  establish: returnEstablishSchema,
+  establish: returnEstablishSchema.omit({createdAt:true,deletedAt:true,updatedAt:true, admin:true}),
 });
 export const returnClientSchema = createClientSchema
   .extend({
@@ -19,3 +19,5 @@ export const returnClientSchema = createClientSchema
     address: returnAddressSchema,
   })
   .omit({ password: true, addresses: true });
+  export type CreateClient = z.infer<typeof createClientSchema>;
+  export type iClient = z.infer<typeof returnClientSchema>;

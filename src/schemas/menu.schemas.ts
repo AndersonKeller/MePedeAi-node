@@ -20,3 +20,6 @@ export const returnMenuClientSchema = z.object({
     email: true,
   }),
 });
+export type CreateMenu = z.infer<typeof createMenuSchema>;
+export type iMenu = z.infer<typeof returnMenuSchema>;
+export type iMenuClient = z.infer<typeof returnMenuClientSchema>;

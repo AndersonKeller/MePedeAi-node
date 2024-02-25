@@ -4,7 +4,7 @@ import {
   CreateTypeProduct,
   UpdateTypeProduct,
   iTypeProduct,
-} from "../interfaces/typeProduct.interfaces";
+} from "../schemas/typeProduct.schemas";
 import { createTypeProductService } from "../services/typeProduct/createTypeProduct.service";
 import { getAllTypeProductsService } from "../services/typeProduct/getAllTypeProducts.service";
 import { getTypeProductByIdService } from "../services/typeProduct/getTypeProductById.service";

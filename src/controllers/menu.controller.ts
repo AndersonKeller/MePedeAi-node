@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Menu } from "../entities";
-import { CreateMenu, iMenu } from "../interfaces/menu.interfaces";
+import { CreateMenu, iMenu } from "../schemas/menu.schemas";
 import { createMenuService } from "../services/menu/createMenu.service";
 import { getMenuByEstablishService } from "../services/menu/getMenuByEstablish.service";
 

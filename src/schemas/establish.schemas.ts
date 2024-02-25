@@ -15,3 +15,5 @@ export const returnEstablishSchema = createEstablishSchema
     deletedAt: z.string().nullable(),
   })
   .omit({ password: true });
+  export type CreateEstablish = z.infer<typeof createEstablishSchema>;
+  export type iEstablish = z.infer<typeof returnEstablishSchema>;
