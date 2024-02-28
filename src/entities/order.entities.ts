@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { orderType, statusOrder } from "../schemas/order.schemas";
+import { orderType, paymentMethods, statusOrder } from "../schemas/order.schemas";
 import { Addresses } from "./address.entities";
 import { Client } from "./client.entities";
 import { Establish } from "./establish.entities";
@@ -23,6 +23,9 @@ class Order {
   
   @Column({type: "enum", enum: statusOrder})
   status: statusOrder
+
+  @Column({type: "enum", enum: paymentMethods})
+  payment: paymentMethods
 
   @Column({type: "varchar", nullable: true})
   comments: string |null

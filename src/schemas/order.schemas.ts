@@ -14,6 +14,12 @@ export enum statusOrder {
   pending = "pending",
   finish = "finish"
 }
+export enum paymentMethods {
+  money = "dinheiro",
+  creedit = "crédito",
+  debit = "débito",
+  pix = "pix"
+}
 export const createOrderSchema = z.object({
   address: returnAddressSchema.omit({ id: true }).optional(),
   menu: returnMenuSchema.pick({ id: true }),
@@ -21,6 +27,7 @@ export const createOrderSchema = z.object({
   order_type: z.nativeEnum(orderType),
   status: z.nativeEnum(statusOrder).default(statusOrder.pending),
   comments: z.string().nullable().default(null),
+  payment: z.nativeEnum(paymentMethods)
 });
 export const returnOrderSchema = createOrderSchema
   .extend({
@@ -30,7 +37,7 @@ export const returnOrderSchema = createOrderSchema
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
     orderProducts: returnProductSchema.omit({ establish: true }).array(),
-    client: returnClientSchema.omit({establish:true})
+    client: returnClientSchema.omit({establish:true,address:true})
   })
   .omit({ products: true });
 

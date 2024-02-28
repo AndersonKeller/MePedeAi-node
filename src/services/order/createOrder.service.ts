@@ -51,7 +51,7 @@ export const createOrderService = async (
   let findAddressClient: Addresses | null = await addressRepository.findOne({
     where: {
       id: findClient!.address.id,
-    },
+    }
   });
   if (orderData.address) {
     const newAddress: Addresses = addressRepository.create(orderData.address);
@@ -64,7 +64,6 @@ export const createOrderService = async (
       id: orderData.menu.id,
     },
   });
-  const ids: number[] = orderData.products.map((prod) => prod.id);
 
   const findProducts: Product[] | null = await productRepository.find({
     where: {
@@ -108,7 +107,8 @@ export const createOrderService = async (
     establish: findEstablish,
     total: totalValueOrder,
     status: statusOrder.pending,
-    comments: orderData.comments
+    comments: orderData.comments,
+    payment: orderData.payment
   };
 
   // console.log(findProducts);
@@ -123,7 +123,7 @@ export const createOrderService = async (
     });
     await orderproductRepository.save(order_products);
   });
-
+  console.log(newOrder)
   const returnOrder = returnOrderSchema.parse({
     ...newOrder,
     orderProducts: [...orderQuantities],

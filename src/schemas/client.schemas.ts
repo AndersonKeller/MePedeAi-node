@@ -7,7 +7,7 @@ export const createClientSchema = z.object({
   phone: z.string().max(12, "Phone number wrong format"),
   email: z.string().email("Email wrong format"),
   password: z.string().max(120),
-  addresses: createAddressSchema,
+  address: createAddressSchema,
   establish: returnEstablishSchema.omit({createdAt:true,deletedAt:true,updatedAt:true, admin:true}),
 });
 export const returnClientSchema = createClientSchema

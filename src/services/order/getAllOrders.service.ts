@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Order } from "../../entities";
+import moment from "moment";
 export const getAllOrdersService = async (
   establishId: string
 ): Promise<any> => {
@@ -25,6 +26,11 @@ export const getAllOrdersService = async (
     },
     order: { id: "DESC" },
   });
-
+  orders.map((order)=>{
+    order.createdAt = moment(order.createdAt).format("DD/MM/YYYY")
+    order.updatedAt = moment(order.updatedAt).format("DD/MM/YYYY")
+    return order
+  })
+  // console.log(returnOrders)
   return orders;
 };
