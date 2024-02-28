@@ -15,11 +15,11 @@ export const createClientService = async (
   const establishRepository: Repository<Establish> =
     AppDataSource.getRepository(Establish);
 
-  const addressData: CreateAddress = clientData.addresses;
+  const addressData: CreateAddress = clientData.address;
   const address: Addresses = addressRepository.create(addressData);
   await addressRepository.save(address);
 
-  clientData.addresses = address;
+  clientData.address = address;
   const findEstablish: Establish | null = await establishRepository.findOne({
     where: {
       id: clientData.establish.id,
@@ -27,7 +27,7 @@ export const createClientService = async (
   });
   const newClient: any = {
     ...clientData,
-    address: clientData.addresses,
+    address: clientData.address,
   };
 
   const client: Client[] = clientRepository.create({
