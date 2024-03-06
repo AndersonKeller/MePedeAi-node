@@ -3,6 +3,7 @@ import {
   createTypeProductController,
   getAllTypeProductsController,
   getTypeProductByIdController,
+  removeTypeProductController,
   updateTypeProductByIdController,
 } from "../controllers/typeProduct.controller";
 import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
@@ -39,3 +40,9 @@ typeProductRoutes.patch(
   ensureTypeProductExistsMiddleware,
   updateTypeProductByIdController
 );
+typeProductRoutes.delete(
+  "/:id",
+  ensureTokenvalidMiddleware,
+  ensureTypeProductExistsMiddleware,
+  removeTypeProductController
+)

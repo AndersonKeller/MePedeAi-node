@@ -9,6 +9,7 @@ import { createTypeProductService } from "../services/typeProduct/createTypeProd
 import { getAllTypeProductsService } from "../services/typeProduct/getAllTypeProducts.service";
 import { getTypeProductByIdService } from "../services/typeProduct/getTypeProductById.service";
 import { upadteTypeProductByIdService } from "../services/typeProduct/updateTypeProductById.service";
+import { removeTypeProductService } from "../services/typeProduct/removeTypeProduct.service";
 
 export const createTypeProductController = async (
   req: Request,
@@ -56,3 +57,11 @@ export const updateTypeProductByIdController = async (
   );
   return res.status(200).json(typeProduct);
 };
+export const removeTypeProductController = async(
+  req: Request,
+  res:Response
+):Promise<Response>=>{
+  const typeproductId: number = parseInt(req.params.id)
+  await removeTypeProductService(typeproductId)
+  return res.status(204).send()
+}
