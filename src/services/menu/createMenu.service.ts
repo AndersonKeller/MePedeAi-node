@@ -11,12 +11,14 @@ export const createMenuService = async (
   const menuRepository: Repository<Menu> = AppDataSource.getRepository(Menu);
   const establishRepository: Repository<Establish> =
     AppDataSource.getRepository(Establish);
-  const findEstablish: any | null = await establishRepository.findOneBy({
+  const findEstablish: Establish | null = await establishRepository.findOneBy({
     id: establishId,
   });
   const findMenu: Menu | null = await menuRepository.findOne({
     where: {
-      establish: findEstablish!,
+      establish: {
+        id: findEstablish?.id!
+      },
     },
     relations: {
       product: true,
@@ -31,8 +33,8 @@ export const createMenuService = async (
     await menuRepository.save(newMenu);
     return newMenu;
   }
-
-  const menu: Menu[] | Menu = menuRepository.create(menuData);
+  const data:any = menuData
+  const menu: any = menuRepository.create(data);
   await menuRepository.save(menu);
   const returnMenu = returnMenuSchema.parse(menu);
   return returnMenu;

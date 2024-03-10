@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Product, TypeProduct } from "../../entities";
-import { UpdateProduct } from "../../schemas/product.schemas";
+import { UpdateProduct, iProduct } from "../../schemas/product.schemas";
 
 export const updateProductByIdService = async (
   productData: UpdateProduct,
@@ -28,12 +28,14 @@ export const updateProductByIdService = async (
         },
       })
     : null;
-  const product: Product = productRepository.create({
-    ...findProduct,
+    productData.quantity= String(productData.quantity)
+    const data: any = {
+      ...findProduct,
     ...productData,
     type: findTypeProduct ? findTypeProduct : findProduct!.type,
-  });
+    }
+  const product: Product[] = productRepository.create(data);
 
   await productRepository.save(product);
-  return product;
+  return product[0];
 };

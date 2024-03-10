@@ -20,8 +20,8 @@ class Product {
   description: string;
   @Column({ type: "float" })
   price: number;
-  @Column({ type: "int", default: 1 })
-  quantity: number;
+  @Column({ length:25})
+  quantity: string;
   @ManyToOne(() => TypeProduct)
   type: TypeProduct;
   @ManyToOne(() => Establish)

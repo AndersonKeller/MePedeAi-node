@@ -24,15 +24,15 @@ export const createProductService = async (
         name: productData.typeProduct,
       },
     });
-
-  const product: Product = productRepository.create({
-    type: findTypeProduct!,
-    name: productData.name,
-    description: productData.description,
-    establish: findEstablish!,
-    price: productData.price,
-    quantity: productData.quantity,
-  });
+    const newProduct:any={
+      type: findTypeProduct!,
+      name: productData.name,
+      description: productData.description,
+      establish: findEstablish!,
+      price: productData.price,
+      quantity: productData.quantity,
+    }
+  const product: any = productRepository.create(newProduct);
   await productRepository.save(product);
   const returnProduct = returnProductSchema.parse(product);
   return returnProduct;

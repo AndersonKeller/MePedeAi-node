@@ -75,7 +75,7 @@ export const createOrderService = async (
     },
   });
 
-  console.log(findProducts);
+
   if(findProducts.length !== orderData.products.length){
     throw new AppError("Any product not found", 404)
   }
@@ -86,12 +86,11 @@ export const createOrderService = async (
     const newProd = { ...findProd, quantity: prod.quantity };
     return newProd;
   });
+  // console.log("findProds",findProducts)
   const totalValues: number[] = orderQuantities.map((prod) => {
-    const total = findProducts.reduce((prev, next) => {
-      return next.price * prod.quantity;
-    }, 0);
+    const findProd = findProducts.find((item)=>item.id === prod.id)
 
-    return total;
+    return findProd?.price! * +prod.quantity;
   });
 
   const totalValueOrder: number = totalValues.reduce(
@@ -112,18 +111,20 @@ export const createOrderService = async (
   };
 
   // console.log(findProducts);
-  const newOrder: any = orderRepository.create(order);
+  const newOrder: Order[] = orderRepository.create(order);
 
-  const orderSaved: any = await orderRepository.save(newOrder);
+  const orderSaved: Order[] = await orderRepository.save(newOrder);
+  console.log(orderQuantities,"judas")
+  const newP: any = 
   orderQuantities.forEach(async (prod) => {
-    const order_products = orderproductRepository.create({
-      order: orderSaved,
-      product: prod,
-      quantity: prod.quantity,
-    });
+    const newP: any = {
+      order:orderSaved,
+      quantity:prod.quantity,
+      product:prod
+    }
+    const order_products:any = orderproductRepository.create(newP);
     await orderproductRepository.save(order_products);
   });
-  console.log(newOrder)
   const returnOrder = returnOrderSchema.parse({
     ...newOrder,
     orderProducts: [...orderQuantities],

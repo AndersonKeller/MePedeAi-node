@@ -8,7 +8,7 @@ export const createProductSchema = z.object({
   description: z.string(),
   typeProduct: z.string(),
   price: z.number(),
-  quantity: z.number(),
+  quantity: z.union([z.string(),z.number()]),
 });
 
 export const returnProductSchema = createProductSchema

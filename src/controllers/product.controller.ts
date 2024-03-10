@@ -3,7 +3,7 @@ import { Product } from "../entities";
 import { UpdateProduct, iProduct } from "../schemas/product.schemas";
 import { createProductService } from "../services/product/createProduct.service";
 import { getAllProductsService } from "../services/product/getAllProducts.service";
-import { getProductByIdService } from "../services/product/getProductById.servicec";
+import { getProductByIdService } from "../services/product/getProductById.service";
 import { updateProductByIdService } from "../services/product/updateproductById.service";
 export const createProductController = async (
   req: Request,
