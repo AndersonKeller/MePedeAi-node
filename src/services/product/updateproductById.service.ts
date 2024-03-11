@@ -34,8 +34,8 @@ export const updateProductByIdService = async (
     ...productData,
     type: findTypeProduct ? findTypeProduct : findProduct!.type,
     }
-  const product: Product[] = productRepository.create(data);
-
+  const product: any = productRepository.create(data);
+    console.log(product)
   await productRepository.save(product);
-  return product[0];
+  return product;
 };

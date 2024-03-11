@@ -45,5 +45,6 @@ export const updateProductByIdController = async (
     parseInt(req.params.id),
     establishId
   );
-  return res.status(201).json(product);
+  console.log(product)
+  return res.status(200).json(product);
 };

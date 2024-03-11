@@ -19,5 +19,7 @@ export const returnClientSchema = createClientSchema
     address: returnAddressSchema,
   })
   .omit({ password: true });
+  export const returnAllClientsSchema = returnClientSchema.omit({establish:true}).array()
   export type CreateClient = z.infer<typeof createClientSchema>;
   export type iClient = z.infer<typeof returnClientSchema>;
+  export type iClients = z.infer<typeof returnAllClientsSchema>

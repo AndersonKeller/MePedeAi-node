@@ -4,6 +4,8 @@ import { createEstablishService } from "../services/establish/createEstablish.se
 import { Establish } from "../entities";
 import { iEstablish } from "../schemas/establish.schemas";
 import { retriveOwnerService } from "../services/establish/retrieveOwner.service";
+import { getAllClientsEstablishService } from "../services/establish/getAllClientsEstablish.service";
+import { iClient, iClients } from "../schemas/client.schemas";
 export const createEstablishController = async (
   req: Request,
   res: Response
@@ -22,3 +24,11 @@ export const retriveOwnerController = async (
   );
   return res.status(201).json(establish);
 };
+export const getAllCLientsEstablishController=async (
+  req: Request,
+  res: Response
+):Promise<Response>=>{
+  const establishId:string = req.user.id
+  const clients:iClients = await getAllClientsEstablishService(establishId)
+  return res.status(200).json(clients)
+}

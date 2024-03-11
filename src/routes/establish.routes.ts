@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createEstablishController,
+  getAllCLientsEstablishController,
   retriveOwnerController,
 } from "../controllers/establish.controller";
 import { ensureDataIsValidMiddleware } from "../middleware/ensureDataIsValid.middleware";
@@ -20,3 +21,8 @@ establishRoutes.get(
   ensureTokenvalidMiddleware,
   retriveOwnerController
 );
+establishRoutes.get(
+  "/clients",
+  ensureTokenvalidMiddleware,
+  getAllCLientsEstablishController
+)
