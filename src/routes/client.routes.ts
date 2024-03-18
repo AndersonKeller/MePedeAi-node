@@ -24,7 +24,6 @@ clientRoutes.post(
   createClientLoginController
 );
 clientRoutes.get(
-  "/menu",
-  ensureTokenClientIsValidMiddleware,
+  "/menu/:id",
   getMenuClientController
 );

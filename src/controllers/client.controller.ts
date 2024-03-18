@@ -27,12 +27,10 @@ export const getMenuClientController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { admin, id, type, establishId } = req.user;
+  const id = req.params.id;
   const menu: iMenuClient = await getMenuClientService(
-    admin,
     id,
-    type,
-    establishId!
+    
   );
   return res.status(200).json(menu);
 };
